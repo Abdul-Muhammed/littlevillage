@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — Little Village Preschool</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .contact-hero {
+      background: linear-gradient(165deg, #FFF0F0 0%, #FFF5E8 40%, #EDF5FB 80%, #F0F7F4 100%);
+    }
+
+    .contact-cards-section { background: var(--white); }
+
+    .contact-card {
+      background: var(--warm-white);
+      border-radius: var(--radius-lg);
+      padding: 36px;
+      text-align: center;
+      border: 2px solid var(--sand);
+      transition: var(--transition);
+    }
+
+    .contact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: transparent;
+    }
+
+    .contact-card-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .contact-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: var(--text-light);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+
+    .contact-card a {
+      color: var(--coral);
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .contact-card a:hover { color: #e8575c; }
+
+    .contact-form-section { background: var(--cream); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-form-wrap {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .contact-form-wrap h2 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-form-wrap > p {
+      color: var(--text-light);
+      font-size: .95rem;
+      margin-bottom: 28px;
+    }
+
+    .form-success {
+      display: none;
+      background: rgba(126,200,183,.12);
+      color: #3a8a6d;
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .contact-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .info-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .info-card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--sand);
+      font-size: .95rem;
+    }
+
+    .info-row:last-child { border-bottom: none; }
+
+    .info-row .day {
+      font-weight: 700;
+      min-width: 120px;
+    }
+
+    .info-row .time { color: var(--text-light); }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    .tour-section { background: var(--white); }
+
+    .tour-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .tour-image img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+    }
+
+    .tour-content h2 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+    }
+
+    .tour-content > p {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .tour-list {
+      margin-bottom: 32px;
+    }
+
+    .tour-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      font-weight: 600;
+      font-size: .95rem;
+    }
+
+    .tour-highlight {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(126,200,183,.1);
+      padding: 10px 20px;
+      border-radius: var(--radius-full);
+      font-size: .9rem;
+      font-weight: 700;
+      color: #3a8a6d;
+      margin-top: 8px;
+      margin-bottom: 28px;
+    }
+
+    @media (max-width: 900px) {
+      .tour-grid { grid-template-columns: 1fr; }
+      .tour-image { max-width: 500px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="22" fill="#FFD166" opacity=".15"/><path d="M22 8L10 18v14a2 2 0 002 2h20a2 2 0 002-2V18L22 8z" fill="#7EC8B7" stroke="#5aab99" stroke-width="1.5"/><rect x="18" y="24" width="8" height="10" rx="2" fill="#FFD166"/><circle cx="22" cy="16" r="3" fill="#EF767A"/><path d="M14 12l8-6 8 6" stroke="#5aab99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <div class="nav-logo-text">Little Village<span>Preschool & Early Learning</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="programs.html">Programs</a>
+        <a href="story.html">Our Story</a>
+        <a href="enrolment.html">Enrolment</a>
+        <a href="contact.html" class="active">Contact</a>
+      </div>
+      <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Book a Tour</a>
+      <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="nav-mobile">
+      <a href="index.html">Home</a>
+      <a href="programs.html">Programs</a>
+      <a href="story.html">Our Story</a>
+      <a href="enrolment.html">Enrolment</a>
+      <a href="contact.html" class="active">Contact</a>
+      <a href="contact.html" class="btn btn-primary">Book a Tour</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="page-hero contact-hero">
+    <div class="container">
+      <span class="section-label fade-in">Contact Us</span>
+      <h1 class="section-title fade-in">We'd Love to<br>Hear From You</h1>
+      <p class="section-subtitle mx-auto fade-in">Whether you have a question, want to book a tour, or just want to say kia ora — our doors (and hearts) are always open.</p>
+    </div>
+    <div class="wave-divider" style="position:absolute;bottom:0;left:0;right:0;">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
+        <path d="M0,50 C480,100 960,10 1440,50 L1440,100 L0,100Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT CARDS ===== -->
+  <section class="contact-cards-section section-padding">
+    <div class="container">
+      <div class="grid-4" data-stagger>
+        <div class="contact-card fade-in">
+          <div class="contact-card-icon" style="background:rgba(126,200,183,.12)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <h3>Call Us</h3>
+          <p><a href="tel:099480365">09 948 0365</a></p>
+        </div>
+
+        <div class="contact-card fade-in">
+          <div class="contact-card-icon" style="background:rgba(255,209,102,.12)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e6a800" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3>Email Us</h3>
+          <p><a href="mailto:Info@lvpreschool.co.nz">Info@lvpreschool.co.nz</a></p>
+        </div>
+
+        <div class="contact-card fade-in">
+          <div class="contact-card-icon" style="background:rgba(239,118,122,.1)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EF767A" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <h3>Visit Us</h3>
+          <p>46 Ambler Avenue<br>Glen Eden, Auckland 0602</p>
+        </div>
+
+        <div class="contact-card fade-in">
+          <div class="contact-card-icon" style="background:rgba(184,169,232,.12)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B8A9E8" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Open Year Round</h3>
+          <p>Closes only on public holidays</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FORM + SIDEBAR ===== -->
+  <section class="contact-form-section section-padding">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-form-wrap fade-in">
+          <h2>Send Us a Message</h2>
+          <p>Have a question about our programmes, enrolment, or anything else? We'd love to help!</p>
+          <div class="form-success">Thank you for your message! We'll get back to you within 24 hours.</div>
+          <form data-form="contact">
+            <input type="hidden" name="_subject" value="New Contact Enquiry - Little Village Preschool">
+            <input type="hidden" name="_captcha" value="false">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Your Name</label>
+                <input type="text" name="name" class="form-input" placeholder="Full name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone (optional)</label>
+                <input type="tel" name="phone" class="form-input" placeholder="02X XXX XXXX">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" name="email" class="form-input" placeholder="your.email@example.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Subject</label>
+              <select name="subject" class="form-select">
+                <option value="">What can we help with?</option>
+                <option value="Book a Tour">Book a Tour</option>
+                <option value="Enrolment Enquiry">Enrolment Enquiry</option>
+                <option value="Program Information">Program Information</option>
+                <option value="General Question">General Question</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Your Message</label>
+              <textarea name="message" class="form-textarea" placeholder="Tell us how we can help..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center">Send Message</button>
+          </form>
+        </div>
+
+        <div class="contact-sidebar fade-in">
+          <div class="info-card">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EF767A" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Opening Hours
+            </h3>
+            <div class="info-row">
+              <span class="day">Monday</span>
+              <span class="time">7:30am – 5:30pm</span>
+            </div>
+            <div class="info-row">
+              <span class="day">Tuesday</span>
+              <span class="time">7:30am – 5:30pm</span>
+            </div>
+            <div class="info-row">
+              <span class="day">Wednesday</span>
+              <span class="time">7:30am – 5:30pm</span>
+            </div>
+            <div class="info-row">
+              <span class="day">Thursday</span>
+              <span class="time">7:30am – 5:30pm</span>
+            </div>
+            <div class="info-row">
+              <span class="day">Friday</span>
+              <span class="time">7:30am – 5:30pm</span>
+            </div>
+            <div class="info-row">
+              <span class="day">Saturday</span>
+              <span class="time" style="color:var(--coral)">Closed</span>
+            </div>
+            <div class="info-row">
+              <span class="day">Sunday</span>
+              <span class="time" style="color:var(--coral)">Closed</span>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B8A9E8" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+              Follow Our Adventures
+            </h3>
+            <p style="font-size:.9rem;color:var(--text-light);margin-bottom:16px">See what our little learners are up to every day on social media!</p>
+            <div style="display:flex;gap:12px">
+              <a href="#" class="btn btn-sm" style="background:rgba(239,118,122,.1);color:var(--coral)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                Instagram
+              </a>
+              <a href="#" class="btn btn-sm" style="background:rgba(112,185,232,.1);color:var(--sky)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                Facebook
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BOOK A TOUR ===== -->
+  <section class="tour-section section-padding">
+    <div class="container">
+      <div class="tour-grid">
+        <div class="tour-image fade-in">
+          <img src="assets/kids_with_teacher.jpeg" alt="Children with their teacher at Little Village Preschool">
+        </div>
+        <div class="tour-content fade-in">
+          <span class="section-label">Visit Us</span>
+          <h2>Book a Centre Tour</h2>
+          <p>There's nothing quite like seeing our centre in action. Book a personalised tour and experience the warmth, energy, and joy of Little Village firsthand.</p>
+
+          <div class="tour-highlight">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3a8a6d" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+            Includes 2 free transition visits for your child
+          </div>
+
+          <ul class="tour-list">
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Meet our dedicated educators
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Explore our indoor and outdoor spaces
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Learn about our programmes and philosophy
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Ask any questions in a relaxed setting
+            </li>
+            <li>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              Tours take about 30–45 minutes
+            </li>
+          </ul>
+
+          <div style="display:flex;gap:16px;flex-wrap:wrap">
+            <a href="mailto:Info@lvpreschool.co.nz" class="btn btn-primary">Email to Book</a>
+            <a href="enrolment.html" class="btn btn-secondary">Enrolment Info</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="section-padding" style="background:var(--cream);">
+    <div class="container">
+      <div class="cta-banner fade-in">
+        <h2>Your Little One's Adventure Awaits</h2>
+        <p>Join a preschool community that feels like whānau. We can't wait to welcome you.</p>
+        <a href="enrolment.html" class="btn btn-lg">Start Enrolment</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="margin-bottom:4px">
+            <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="22" fill="#FFD166" opacity=".15"/><path d="M22 8L10 18v14a2 2 0 002 2h20a2 2 0 002-2V18L22 8z" fill="#7EC8B7" stroke="#5aab99" stroke-width="1.5"/><rect x="18" y="24" width="8" height="10" rx="2" fill="#FFD166"/><circle cx="22" cy="16" r="3" fill="#EF767A"/></svg>
+            <div class="nav-logo-text" style="color:var(--white)">Little Village<span>Preschool & Early Learning</span></div>
+          </a>
+          <p>Where everyone has a place. A nurturing space where children unleash their full potential through curiosity, creativity, and play.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          </div>
+        </div>
+        <div><h4>Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="programs.html">Programs</a><a href="story.html">Our Story</a><a href="enrolment.html">Enrolment</a><a href="contact.html">Contact</a></div></div>
+        <div><h4>Programs</h4><div class="footer-links"><a href="programs.html">Babies & Toddlers (0–2)</a><a href="programs.html">Little Learners (2–3.5)</a><a href="programs.html">Preschool Programme (3.5+)</a><a href="enrolment.html">Current Promotion</a></div></div>
+        <div><h4>Get in Touch</h4>
+          <div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>46 Ambler Avenue<br>Glen Eden, Auckland 0602</span></div>
+          <div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:099480365" style="color:inherit">09 948 0365</a></div>
+          <div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>Info@lvpreschool.co.nz</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 Little Village Preschool. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg></button>
+  <script src="script.js"></script>
+</body>
+</html>

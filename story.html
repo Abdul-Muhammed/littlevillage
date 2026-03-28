@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Story — Little Village Preschool</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .story-hero {
+      background: linear-gradient(165deg, #FFF5E8 0%, #F5F0FA 40%, #F0F7F4 80%, #EDF5FB 100%);
+    }
+
+    .story-narrative {
+      background: var(--white);
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .story-images {
+      position: relative;
+      position: sticky;
+      top: 120px;
+    }
+
+    .story-img-main {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+
+    .story-img-main img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+    }
+
+    .story-img-accent {
+      position: absolute;
+      bottom: -24px;
+      left: -24px;
+      width: 180px;
+      height: 180px;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 5px solid var(--white);
+    }
+
+    .story-img-accent img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .story-year {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      background: var(--sunshine);
+      color: var(--text-dark);
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      font-weight: 800;
+      padding: 12px 20px;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-md);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .story-text p {
+      color: var(--text-light);
+      font-size: 1.05rem;
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+
+    /* .story-text p:first-of-type::first-letter {
+      font-family: 'Baloo 2', cursive;
+      font-size: 3.2rem;
+      float: left;
+      line-height: .85;
+      margin-right: 8px;
+      color: var(--coral);
+    } */
+
+    .founder-sign {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .founder-sign .founder-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--mint);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.4rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      border: 3px solid var(--mint);
+    }
+
+    .founder-sign-text {
+      font-weight: 700;
+      font-size: .95rem;
+    }
+
+    .founder-sign-text span {
+      display: block;
+      font-weight: 500;
+      font-size: .85rem;
+      color: var(--text-light);
+    }
+
+    @media (max-width: 900px) {
+      .story-grid { grid-template-columns: 1fr; }
+      .story-images { max-width: 500px; margin: 0 auto 40px; position: relative; top: 0; }
+    }
+
+    /* Values */
+    .values-section {
+      background: var(--cream);
+    }
+
+    .value-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      border-radius: 4px 4px 0 0;
+    }
+
+    .value-card:nth-child(1)::before { background: var(--coral); }
+    .value-card:nth-child(2)::before { background: var(--mint); }
+    .value-card:nth-child(3)::before { background: var(--sunshine); }
+    .value-card:nth-child(4)::before { background: var(--lavender); }
+
+    .value-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .value-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .value-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .value-card p {
+      font-size: .95rem;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .value-card .maori-proverb {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--sand);
+      font-style: italic;
+      font-size: .9rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .value-card .maori-proverb .translation {
+      display: block;
+      margin-top: 6px;
+      font-style: normal;
+      font-size: .85rem;
+      color: var(--text-light);
+    }
+
+    /* Gallery */
+    .gallery-section { background: var(--white); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item:first-child {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .gallery-item:first-child img { height: 100%; }
+
+    @media (max-width: 700px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:first-child { grid-column: span 2; grid-row: span 1; }
+      .gallery-item:first-child img { height: 250px; }
+    }
+
+    /* Quote block between story paragraphs */
+    .story-quote {
+      background: linear-gradient(135deg, rgba(126,200,183,.08), rgba(255,209,102,.08));
+      border-left: 4px solid var(--mint);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 24px 28px;
+      margin: 28px 0;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      line-height: 1.7;
+    }
+
+    .story-quote cite {
+      display: block;
+      margin-top: 10px;
+      font-style: normal;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--mint);
+    }
+
+    /* Vision statement */
+    .vision-statement {
+      text-align: center;
+      padding: 48px 40px;
+      margin-bottom: 48px;
+      background: linear-gradient(135deg, rgba(239,118,122,.06), rgba(255,209,102,.08), rgba(126,200,183,.06));
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vision-statement::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--coral), var(--sunshine), var(--mint));
+    }
+
+    .vision-label {
+      display: inline-block;
+      font-family: 'Baloo 2', cursive;
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--coral);
+      margin-bottom: 16px;
+    }
+
+    .vision-text {
+      font-family: 'Baloo 2', cursive;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .vision-text .highlight {
+      color: var(--coral);
+      position: relative;
+    }
+
+    .vision-text .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: var(--sunshine);
+      opacity: .35;
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    .vision-subtext {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* Grid-3 for values */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 900px) {
+      .values-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="22" fill="#FFD166" opacity=".15"/><path d="M22 8L10 18v14a2 2 0 002 2h20a2 2 0 002-2V18L22 8z" fill="#7EC8B7" stroke="#5aab99" stroke-width="1.5"/><rect x="18" y="24" width="8" height="10" rx="2" fill="#FFD166"/><circle cx="22" cy="16" r="3" fill="#EF767A"/><path d="M14 12l8-6 8 6" stroke="#5aab99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <div class="nav-logo-text">Little Village<span>Preschool & Early Learning</span></div>
+      </a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="programs.html">Programs</a>
+        <a href="story.html" class="active">Our Story</a>
+        <a href="enrolment.html">Enrolment</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Book a Tour</a>
+      <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+    <div class="nav-mobile">
+      <a href="index.html">Home</a>
+      <a href="programs.html">Programs</a>
+      <a href="story.html" class="active">Our Story</a>
+      <a href="enrolment.html">Enrolment</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html" class="btn btn-primary">Book a Tour</a>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero story-hero">
+    <div class="container">
+      <span class="section-label fade-in">Our Story</span>
+      <h1 class="section-title fade-in">Where Everyone Has a Place</h1>
+      <p class="section-subtitle mx-auto fade-in">A journey built on two decades of teaching experience, a passion for child-centred education, and a genuine desire to serve our community.</p>
+    </div>
+    <div class="wave-divider" style="position:absolute;bottom:0;left:0;right:0;">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
+        <path d="M0,60 C240,20 480,80 720,50 C960,20 1200,70 1440,40 L1440,100 L0,100Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== FOUNDER'S STORY ===== -->
+  <section class="story-narrative section-padding">
+    <div class="container">
+      <div class="story-grid">
+        <div class="story-images fade-in">
+          <div class="story-img-main">
+            <img src="assets/kids_with_teacher.jpeg" alt="Children learning with their teacher at Little Village Preschool">
+          </div>
+          <div class="story-img-accent animate-float-slow">
+            <img src="assets/kid_painting.jpeg" alt="Child painting at Little Village">
+          </div>
+          <div class="story-year">Since 2004</div>
+        </div>
+
+        <div class="story-text fade-in">
+          <span class="section-label">Meet Our Founder</span>
+          <h2 class="section-title" style="font-size:2rem">A Vision Rooted in Purpose</h2>
+
+          <p>My name is Fathima Ashiqua, and together with my husband, Hafeez Nizham, I took over Little Village Preschool with a clear and purposeful vision: to strengthen quality, continuity, and outcomes for every child and family in our community.</p>
+
+          <p>My journey in education began in 2004, and over the past two decades I have had the privilege of teaching across the Middle East (Saudi Arabia and Dubai) and New Zealand, working in early childhood and primary education. I am a registered teacher and have also held leadership roles as a team leader and section head. These experiences have shaped my deep understanding of how children learn, grow, and transition through different stages of their educational journey.</p>
+
+          <div class="story-quote">
+            Our vision of "where everyone has a place" guides everything we do.
+            <cite>— Fathima Ashiqua, Founder & Director</cite>
+          </div>
+
+          <p>I came to New Zealand to pursue my master's in education and was drawn to the country's inclusive values and strong commitment to child-centred education. My teaching practice is guided by Te Whāriki, alongside educational approaches such as Montessori principles and Lev Vygotsky's emphasis on learning through relationships and social interaction.</p>
+
+          <p>Having worked closely within primary education, I clearly identified a gap in how children are supported during the transition from early learning into school. Understanding what primary teachers are looking for, I have strengthened a purposeful transition-to-school programme that supports children to become confident, independent, and self-regulated learners, both academically and socially.</p>
+
+          <p>The decision to take over Little Village Preschool was grounded in a genuine desire to serve our community.</p>
+
+          <div class="founder-sign">
+            <div class="founder-avatar">FA</div>
+            <div class="founder-sign-text">
+              Fathima Ashiqua
+              <span>Founder & Director</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VISION / MISSION / PHILOSOPHY ===== -->
+  <section class="values-section section-padding">
+    <div class="container">
+      <div class="text-center fade-in" style="margin-bottom:48px">
+        <span class="section-label">Our Foundation</span>
+        <h2 class="section-title">Vision, Mission & Philosophy</h2>
+        <p class="section-subtitle mx-auto">The principles that shape every decision, every programme, and every interaction at Little Village Preschool.</p>
+      </div>
+
+      <!-- Vision — full-width statement -->
+      <div class="vision-statement fade-in">
+        <div class="vision-label">Our Vision</div>
+        <div class="vision-text">Where everyone has a <span class="highlight">place</span>.</div>
+        <p class="vision-subtext">A community where every child, family, and educator feels valued, supported, and empowered — guided by curiosity, creativity, and genuine belonging.</p>
+      </div>
+
+      <div class="values-grid" data-stagger>
+        <!-- Mission -->
+        <div class="value-card fade-in">
+          <div class="value-icon" style="background:rgba(126,200,183,.12)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>Our Mission</h3>
+          <p>We are committed to providing a nurturing and inclusive environment where each child is supported to reach their full potential through curiosity, creativity, and play. We foster confident learners who feel valued, supported, and empowered in their learning journey.</p>
+        </div>
+
+        <!-- Philosophy -->
+        <div class="value-card fade-in">
+          <div class="value-icon" style="background:rgba(255,209,102,.12)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e6a800" stroke-width="2" stroke-linecap="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <h3>Our Philosophy</h3>
+          <p>At Little Village Preschool, we believe children thrive when they feel safe, respected, and nurtured. We support the development of the whole child by providing a warm, inclusive, and responsive environment that promotes emotional, social, physical, and cognitive wellbeing.</p>
+          <p style="margin-top:12px">Our approach values play, exploration, and relationships as the foundation for learning. Inspired by Te Whāriki and child-centred, nature-based approaches, we encourage curiosity, creativity, independence, and safe risk-taking.</p>
+          <p style="margin-top:12px">Strong partnerships with whānau, respect for diversity, and a commitment to inclusion underpin our practice. We recognise each child as a capable learner with their own unique way of knowing, being, and doing.</p>
+        </div>
+
+        <!-- Community / Whānau -->
+        <div class="value-card fade-in">
+          <div class="value-icon" style="background:rgba(184,169,232,.12)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B8A9E8" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3>Community & Whānau</h3>
+          <p>Our strength comes from our collective. Families, educators, and children working together to create a village where every child belongs and every voice is heard.</p>
+          <div class="maori-proverb">
+            "Ehara taku toa i te toa takitahi, engari he toa takitini."
+            <span class="translation">— My strength is not that of an individual, but that of the collective.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery-section section-padding">
+    <div class="container">
+      <div class="text-center fade-in" style="margin-bottom:48px">
+        <span class="section-label">Life at Little Village</span>
+        <h2 class="section-title">Moments of Joy & Discovery</h2>
+        <p class="section-subtitle mx-auto">A glimpse into the everyday magic — where curiosity meets creativity and every child shines.</p>
+      </div>
+
+      <div class="gallery-grid fade-in">
+        <div class="gallery-item">
+          <img src="assets/kids_red_paint.jpeg" alt="Children exploring with red paint at Little Village Preschool">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/kid_dinosaurs.jpeg" alt="Child playing with dinosaur toys">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/kid_in_tree.jpeg" alt="Child climbing a tree during outdoor play">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/kid_painting.jpeg" alt="Child painting and creating art">
+        </div>
+        <div class="gallery-item">
+          <img src="assets/kid_watering_plant.jpeg" alt="Child watering a plant in the garden">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="section-padding" style="background:var(--cream);">
+    <div class="container">
+      <div class="cta-banner fade-in">
+        <h2>Come Visit Our Little Village</h2>
+        <p>Experience the warmth, joy, and inclusive community of our preschool firsthand. Your child's place is waiting.</p>
+        <a href="contact.html" class="btn btn-lg">Schedule a Visit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="margin-bottom:4px">
+            <svg width="40" height="40" viewBox="0 0 44 44" fill="none"><circle cx="22" cy="22" r="22" fill="#FFD166" opacity=".15"/><path d="M22 8L10 18v14a2 2 0 002 2h20a2 2 0 002-2V18L22 8z" fill="#7EC8B7" stroke="#5aab99" stroke-width="1.5"/><rect x="18" y="24" width="8" height="10" rx="2" fill="#FFD166"/><circle cx="22" cy="16" r="3" fill="#EF767A"/></svg>
+            <div class="nav-logo-text" style="color:var(--white)">Little Village<span>Preschool & Early Learning</span></div>
+          </a>
+          <p>Where everyone has a place. A nurturing space where children unleash their full potential through curiosity, creativity, and play.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          </div>
+        </div>
+        <div><h4>Quick Links</h4><div class="footer-links"><a href="index.html">Home</a><a href="programs.html">Programs</a><a href="story.html">Our Story</a><a href="enrolment.html">Enrolment</a><a href="contact.html">Contact</a></div></div>
+        <div><h4>Programs</h4><div class="footer-links"><a href="programs.html">Babies & Toddlers (0–2)</a><a href="programs.html">Little Learners (2–3.5)</a><a href="programs.html">Preschool Programme (3.5+)</a><a href="enrolment.html">Current Promotion</a></div></div>
+        <div><h4>Get in Touch</h4>
+          <div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>46 Ambler Avenue<br>Glen Eden, Auckland 0602</span></div>
+          <div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg><a href="tel:099480365" style="color:inherit">09 948 0365</a></div>
+          <div class="footer-contact-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>Info@lvpreschool.co.nz</span></div>
+        </div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 Little Village Preschool. All rights reserved.</div>
+    </div>
+  </footer>
+  <button class="back-to-top" aria-label="Back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg></button>
+  <script src="script.js"></script>
+</body>
+</html>

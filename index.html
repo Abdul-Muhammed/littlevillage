@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Little Village Preschool — Where Everyone Has a Place</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0 80px;
+      overflow: hidden;
+      background: linear-gradient(165deg, #FFF5E8 0%, #FFF0F0 40%, #F0F7F4 70%, #EDF5FB 100%);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,209,102,.2);
+      padding: 8px 20px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: .9rem;
+      color: #c49520;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5.5vw, 3.6rem);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 .highlight {
+      color: var(--coral);
+      position: relative;
+    }
+
+    .hero h1 .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: var(--sunshine);
+      opacity: .4;
+      border-radius: 4px;
+      z-index: -1;
+    }
+
+    .hero-text {
+      font-size: 1.15rem;
+      color: var(--text-light);
+      margin-bottom: 36px;
+      max-width: 500px;
+      line-height: 1.8;
+    }
+
+    .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .hero-image-wrapper { position: relative; }
+
+    .hero-image-main {
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-image-main img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+
+    .hero-float-card {
+      position: absolute;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      box-shadow: var(--shadow-md);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-float-card.card-1 {
+      bottom: -20px;
+      left: -30px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-float-card.card-2 {
+      top: 40px;
+      right: -20px;
+      animation: floatSlow 5s ease-in-out infinite;
+    }
+
+    .hero-float-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-float-label {
+      font-weight: 700;
+      font-size: .85rem;
+      color: var(--text-dark);
+    }
+
+    .hero-float-label span {
+      display: block;
+      font-size: .75rem;
+      font-weight: 500;
+      color: var(--text-light);
+    }
+
+    .hero-blob-1 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      border-radius: 50%;
+      background: var(--sunshine);
+      opacity: .08;
+      top: -100px;
+      right: -100px;
+      filter: blur(80px);
+    }
+
+    .hero-blob-2 {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: var(--mint);
+      opacity: .1;
+      bottom: -50px;
+      left: -80px;
+      filter: blur(60px);
+    }
+
+    .deco-star, .deco-circle, .deco-triangle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-text { margin: 0 auto 36px; }
+      .hero-buttons { justify-content: center; }
+      .hero-image-wrapper { max-width: 500px; margin: 0 auto; }
+      .hero-float-card.card-1 { left: 10px; }
+      .hero-float-card.card-2 { right: 10px; }
+    }
+
+    .trust-strip { padding: 60px 0; background: var(--white); }
+    .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .trust-item { text-align: center; padding: 24px; }
+    .trust-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .trust-title {
+      font-family: 'Baloo 2', cursive; font-size: 1.15rem;
+      font-weight: 700; margin-bottom: 8px; color: var(--text-dark);
+    }
+    .trust-text { font-size: .9rem; color: var(--text-light); line-height: 1.6; }
+
+    @media (max-width: 900px) { .trust-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .trust-grid { grid-template-columns: 1fr; } }
+
+    .programs-preview { background: var(--cream); }
+    .program-card .card-img-wrap { position: relative; overflow: hidden; }
+    .program-card .age-badge {
+      position: absolute; top: 16px; left: 16px;
+      background: var(--white); padding: 6px 16px;
+      border-radius: var(--radius-full); font-weight: 700;
+      font-size: .8rem; box-shadow: var(--shadow-sm);
+    }
+    .program-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+    .program-card p { color: var(--text-light); font-size: .95rem; line-height: 1.7; margin-bottom: 20px; }
+    .program-card .learn-more {
+      font-weight: 700; color: var(--coral);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: var(--transition);
+    }
+    .program-card .learn-more:hover { gap: 12px; }
+
+    .philosophy { background: var(--white); position: relative; overflow: hidden; }
+    .philosophy-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .philosophy-images { position: relative; }
+    .philosophy-img-1 { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); }
+    .philosophy-img-1 img { width: 100%; height: 420px; object-fit: cover; }
+    .philosophy-img-2 {
+      position: absolute; bottom: -30px; right: -20px;
+      width: 200px; height: 200px; border-radius: var(--radius-md);
+      overflow: hidden; box-shadow: var(--shadow-lg); border: 5px solid var(--white);
+    }
+    .philosophy-img-2 img { width: 100%; height: 100%; object-fit: cover; }
+    .philosophy-list { margin-top: 28px; }
+    .philosophy-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 24px; }
+    .philosophy-item .check-circle {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 2px;
+    }
+    .philosophy-item h4 { font-size: 1.05rem; margin-bottom: 4px; }
+    .philosophy-item p { font-size: .9rem; color: var(--text-light); line-height: 1.6; }
+
+    @media (max-width: 900px) {
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .philosophy-images { max-width: 500px; margin: 0 auto 40px; }
+    }
+
+    .testimonials-section {
+      background: linear-gradient(180deg, var(--cream) 0%, #F5F0FA 100%);
+    }
+
+    .stats { background: var(--white); }
+    .stats-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 32px; text-align: center;
+    }
+    .stat-number {
+      font-family: 'Baloo 2', cursive; font-size: 2.8rem;
+      font-weight: 800; line-height: 1; margin-bottom: 8px;
+    }
+    .stat-label { font-size: .95rem; color: var(--text-light); font-weight: 600; }
+
+    @media (max-width: 700px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    }
+
+    /* Day in Village preview */
+    .day-preview { background: var(--white); }
+    .day-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .day-list { list-style: none; }
+    .day-list li {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px 0; border-bottom: 1px solid var(--sand);
+    }
+    .day-list li:last-child { border-bottom: none; }
+    .day-time {
+      font-family: 'Baloo 2', cursive; font-weight: 700;
+      color: var(--coral); min-width: 90px; font-size: .95rem;
+    }
+    .day-desc h4 { font-size: 1rem; margin-bottom: 2px; }
+    .day-desc p { font-size: .85rem; color: var(--text-light); line-height: 1.5; }
+
+    @media (max-width: 900px) {
+      .day-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+          <circle cx="22" cy="22" r="22" fill="#FFD166" opacity=".15"/>
+          <path d="M22 8L10 18v14a2 2 0 002 2h20a2 2 0 002-2V18L22 8z" fill="#7EC8B7" stroke="#5aab99" stroke-width="1.5"/>
+          <rect x="18" y="24" width="8" height="10" rx="2" fill="#FFD166"/>
+          <circle cx="22" cy="16" r="3" fill="#EF767A"/>
+          <path d="M14 12l8-6 8 6" stroke="#5aab99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="nav-logo-text">
+          Little Village
+          <span>Preschool & Early Learning</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="programs.html">Programs</a>
+        <a href="story.html">Our Story</a>
+        <a href="enrolment.html">Enrolment</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Book a Tour</a>
+
+      <button class="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <div class="nav-mobile">
+      <a href="index.html" class="active">Home</a>
+      <a href="programs.html">Programs</a>
+      <a href="story.html">Our Story</a>
+      <a href="enrolment.html">Enrolment</a>
+      <a href="contact.html">Contact</a>
+      <a href="contact.html" class="btn btn-primary">Book a Tour</a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-blob-1"></div>
+    <div class="hero-blob-2"></div>
+
+    <svg class="deco-star" style="top:15%;left:8%;opacity:.15" width="32" height="32" viewBox="0 0 32 32"><polygon points="16,2 20,12 30,12 22,19 25,30 16,23 7,30 10,19 2,12 12,12" fill="#FFD166"/></svg>
+    <svg class="deco-circle" style="bottom:20%;right:5%;opacity:.12" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#EF767A"/></svg>
+    <svg class="deco-star" style="top:60%;left:3%;opacity:.1" width="20" height="20" viewBox="0 0 32 32"><polygon points="16,2 20,12 30,12 22,19 25,30 16,23 7,30 10,19 2,12 12,12" fill="#B8A9E8"/></svg>
+
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" fill="#FFD166"/><path d="M6 8l1.5 1.5L10 6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Now Enrolling — Birth to 5 Years
+          </div>
+          <h1>Where Everyone Has a <span class="highlight">Place</span></h1>
+          <p class="hero-text">A nurturing and inclusive environment where each child is supported to reach their full potential through curiosity, creativity, and play. Welcome to Little Village Preschool.</p>
+          <div class="hero-buttons">
+            <a href="programs.html" class="btn btn-primary btn-lg">Explore Programs</a>
+            <a href="contact.html" class="btn btn-secondary btn-lg">Book a Tour</a>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <div class="hero-image-main">
+            <img src="assets/kid_in_tree.jpeg" alt="Child exploring nature at Little Village Preschool">
+          </div>
+
+          <div class="hero-float-card card-1">
+            <div class="hero-float-icon" style="background:rgba(126,200,183,.15)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="hero-float-label">
+              Safe & Nurturing
+              <span>Licensed centre</span>
+            </div>
+          </div>
+
+          <div class="hero-float-card card-2">
+            <div class="hero-float-icon" style="background:rgba(255,209,102,.15)">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e6a800" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <div class="hero-float-label">
+              Open Year Round
+              <span>Closes only on public holidays</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wave-divider" style="position:absolute;bottom:0;left:0;right:0;">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
+        <path d="M0,40 C360,100 720,0 1080,60 C1260,90 1380,50 1440,40 L1440,100 L0,100Z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== PROMOTION SECTION ===== -->
+  <section class="promo-section">
+    <div class="container">
+      <div class="promo-card fade-in">
+        <div class="promo-badge">Special Promotion</div>
+        <h2>More Hours, Less Cost for Your Family</h2>
+        <p style="color:var(--text-light);font-size:1.05rem;line-height:1.7;max-width:560px;margin:0 auto">We're currently offering an exclusive promotion for families joining Little Village Preschool.</p>
+        <div class="promo-details">
+          <div class="promo-detail-item">
+            <div class="promo-number" style="color:var(--coral)">30 hrs</div>
+            <div class="promo-label">Free ECE Per Week</div>
+            <div style="font-size:.78rem;color:var(--mint);font-weight:700;margin-top:4px">Instead of 20 hours</div>
+          </div>
+          <div class="promo-detail-item">
+            <div class="promo-number" style="color:var(--mint)">60%</div>
+            <div class="promo-label">Off Fees</div>
+            <div style="font-size:.78rem;color:var(--coral);font-weight:700;margin-top:4px">Significant savings</div>
+          </div>
+        </div>
+        <a href="enrolment.html" class="btn btn-primary btn-lg">Enquire About This Offer</a>
+        <p class="promo-note">*Conditions apply. Contact us for full details and eligibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TRUST STRIP ===== -->
+  <section class="trust-strip">
+    <div class="container">
+      <div class="trust-grid" data-stagger>
+        <div class="trust-item fade-in">
+          <div class="trust-icon" style="background:rgba(126,200,183,.12)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2" stroke-linecap="round"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div class="trust-title">Safe & Inclusive</div>
+          <p class="trust-text">A safe, nurturing environment where children feel valued, respected, and empowered in their learning journey.</p>
+        </div>
+        <div class="trust-item fade-in">
+          <div class="trust-icon" style="background:rgba(255,209,102,.12)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#e6a800" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="5"/><path d="M3 21v-2a7 7 0 017-7h4a7 7 0 017 7v2"/></svg>
+          </div>
+          <div class="trust-title">Qualified Educators</div>
+          <p class="trust-text">Experienced, registered teachers with expertise across early childhood and primary education.</p>
+        </div>
+        <div class="trust-item fade-in">
+          <div class="trust-icon" style="background:rgba(239,118,122,.1)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#EF767A" stroke-width="2" stroke-linecap="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg>
+          </div>
+          <div class="trust-title">Te Whāriki Guided</div>
+          <p class="trust-text">Inspired by Te Whāriki alongside Montessori principles and child-centred educational approaches.</p>
+        </div>
+        <div class="trust-item fade-in">
+          <div class="trust-icon" style="background:rgba(184,169,232,.12)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#B8A9E8" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="trust-title">Community Focused</div>
+          <p class="trust-text">Strong partnerships with whānau, respect for diversity, and a genuine commitment to inclusion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROGRAMS PREVIEW ===== -->
+  <section class="programs-preview section-padding">
+    <div class="container">
+      <div class="text-center fade-in" style="margin-bottom:48px">
+        <span class="section-label">Our Programs</span>
+        <h2 class="section-title">Learning Adventures for Every Age</h2>
+        <p class="section-subtitle mx-auto">From birth to school age, our thoughtfully designed programs grow with your child, building confidence, creativity, and a love for learning.</p>
+      </div>
+
+      <div class="grid-3" data-stagger>
+        <div class="card program-card fade-in">
+          <div class="card-img-wrap">
+            <img class="card-img" src="assets/kid_dinosaurs.jpeg" alt="Toddler exploring with toys">
+            <span class="age-badge" style="color:var(--coral)">Birth – 2 Years</span>
+          </div>
+          <div class="card-body">
+            <h3>Babies & Toddlers</h3>
+            <p>Music, books, painting, and sensory play in a calm, nurturing setting that fosters wellbeing and belonging for our youngest tamariki.</p>
+            <a href="programs.html" class="learn-more">Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+
+        <div class="card program-card fade-in">
+          <div class="card-img-wrap">
+            <img class="card-img" src="assets/kid_painting.jpeg" alt="Children painting and creating art">
+            <span class="age-badge" style="color:var(--mint)">2 – 3.5 Years</span>
+          </div>
+          <div class="card-body">
+            <h3>Little Learners</h3>
+            <p>Building social skills, early literacy, and creativity through messy play, sensory exploration, and indoor-outdoor flow that encourages discovery.</p>
+            <a href="programs.html" class="learn-more">Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+
+        <div class="card program-card fade-in">
+          <div class="card-img-wrap">
+            <img class="card-img" src="assets/kids_red_paint.jpeg" alt="Preschool children learning together">
+            <span class="age-badge" style="color:var(--sky)">3.5 – School Age</span>
+          </div>
+          <div class="card-body">
+            <h3>Preschool Programme</h3>
+            <p>Structured, transition-to-school experiences through hands-on, inquiry-based learning that nurtures curiosity, independence, and confidence.</p>
+            <a href="programs.html" class="learn-more">Learn More <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHILOSOPHY ===== -->
+  <section class="philosophy section-padding">
+    <div class="container">
+      <div class="philosophy-grid">
+        <div class="philosophy-images fade-in">
+          <div class="philosophy-img-1">
+            <img src="assets/kid_watering_plant.jpeg" alt="Child exploring nature at Little Village">
+          </div>
+          <div class="philosophy-img-2 animate-float-slow">
+            <img src="assets/kid_in_tree.jpeg" alt="Child climbing a tree">
+          </div>
+        </div>
+
+        <div class="fade-in">
+          <span class="section-label">Our Philosophy</span>
+          <h2 class="section-title">Learning Through Play, Relationships & Nature</h2>
+          <p class="section-subtitle" style="margin-bottom:28px">We believe children thrive when they feel safe, respected, and nurtured. Our approach values play, exploration, and relationships as the foundation for learning.</p>
+
+          <div class="philosophy-list">
+            <div class="philosophy-item">
+              <div class="check-circle" style="background:rgba(126,200,183,.15)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7EC8B7" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <h4>Te Whāriki & Montessori Inspired</h4>
+                <p>Guided by Te Whāriki and child-centred approaches including Montessori principles and Vygotsky's social learning theory.</p>
+              </div>
+            </div>
+            <div class="philosophy-item">
+              <div class="check-circle" style="background:rgba(255,209,102,.15)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e6a800" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <h4>Whole-Child Development</h4>
+                <p>Supporting emotional, social, physical, and cognitive wellbeing through a warm, inclusive, and responsive environment.</p>
+              </div>
+            </div>
+            <div class="philosophy-item">
+              <div class="check-circle" style="background:rgba(239,118,122,.12)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EF767A" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <div>
+                <h4>Transition-to-School Programme</h4>
+                <p>A purposeful programme that supports children to become confident, independent, and self-regulated learners for school.</p>
+              </div>
+            </div>
+          </div>
+
+          <a href="story.html" class="btn btn-mint" style="margin-top:12px">Read Our Story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== A DAY IN OUR VILLAGE (Preview) ===== -->
+  <section class="day-preview section-padding">
+    <div class="container">
+      <div class="day-grid">
+        <div class="fade-in">
+          <span class="section-label">A Day in Our Village</span>
+          <h2 class="section-title" style="font-size:2rem">A Gentle Rhythm of Care & Learning</h2>
+          <p class="section-subtitle" style="margin-bottom:28px">Every day at Little Village is thoughtfully structured to balance active play, guided learning, rest, and nourishment.</p>
+          <ul class="day-list">
+            <li>
+              <span class="day-time">Early Morning</span>
+              <div class="day-desc">
+                <h4>Warm Welcome & Breakfast</h4>
+                <p>Supporting smooth transitions, sharing kai in a calm, familiar setting.</p>
+              </div>
+            </li>
+            <li>
+              <span class="day-time">Mid Morning</span>
+              <div class="day-desc">
+                <h4>Stories, Songs & Exploration</h4>
+                <p>Group time, messy play, sensory exploration, and indoor-outdoor flow.</p>
+              </div>
+            </li>
+            <li>
+              <span class="day-time">Midday</span>
+              <div class="day-desc">
+                <h4>Rolling Lunch & Calm Yoga</h4>
+                <p>Shared routines that promote self-help skills and self-regulation.</p>
+              </div>
+            </li>
+            <li>
+              <span class="day-time">Afternoon</span>
+              <div class="day-desc">
+                <h4>Learning & Tidy-Up</h4>
+                <p>Spontaneous learning, collaborative routines building responsibility.</p>
+              </div>
+            </li>
+          </ul>
+          <a href="programs.html" class="btn btn-sunshine" style="margin-top:16px">See Full Daily Schedule</a>
+        </div>
+        <div class="fade-in">
+          <img src="assets/kid_painting.jpeg" alt="Child painting at Little Village Preschool" style="width:100%;height:480px;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-md)">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats section-padding">
+    <div class="container">
+      <div class="stats-grid" data-stagger>
+        <div class="fade-in">
+          <div class="stat-number" style="color:var(--coral)">20+</div>
+          <div class="stat-label">Years of Teaching Experience</div>
+        </div>
+        <div class="fade-in">
+          <div class="stat-number" style="color:var(--mint)">0–5</div>
+          <div class="stat-label">Birth to School Age</div>
+        </div>
+        <div class="fade-in">
+          <div class="stat-number" style="color:var(--sunshine)">365</div>
+          <div class="stat-label">Open Year Round</div>
+        </div>
+        <div class="fade-in">
+          <div class="stat-number" style="color:var(--lavender)">30 hrs</div>
+          <div class="stat-label">Free ECE Available*</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section section-padding">
+    <div class="container">
+      <div class="text-center fade-in" style="margin-bottom:48px">
+        <span class="section-label">Parent Voices</span>
+        <h2 class="section-title">What Families Say About Us</h2>
+        <p class="section-subtitle mx-auto">Real stories from families who chose Little Village for their children's early learning journey.</p>
+      </div>
+
+      <div class="grid-3" data-stagger>
+        <div class="testimonial-card fade-in">
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">Little Village has been a wonderful place for our family. The team creates meaningful learning experiences while nurturing kindness and independence. We feel valued as parents and love how the centre keeps us informed and involved. Our child looks forward to attending every day.</p>
+          <div class="testimonial-author">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--mint);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.2rem;flex-shrink:0">P</div>
+            <div>
+              <div class="testimonial-name">Prianka Sigh</div>
+              <div class="testimonial-role">Little Village Parent</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">We have seen such positive growth in our child since joining the centre. The teachers are caring, attentive, and truly invested in each child's learning journey. The environment feels safe, welcoming, and supportive. We appreciate the strong communication and the way our child's confidence has flourished.</p>
+          <div class="testimonial-author">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--sunshine);display:flex;align-items:center;justify-content:center;color:var(--text-dark);font-weight:800;font-size:1.2rem;flex-shrink:0">F</div>
+            <div>
+              <div class="testimonial-name">Happy Family</div>
+              <div class="testimonial-role">Little Village Parent</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-in">
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">From the moment we walked in, we felt at home. The community here is unlike anything else — children, educators, and whānau all supporting each other. The transition-to-school programme is excellent and our daughter feels confident about starting school.</p>
+          <div class="testimonial-author">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--lavender);display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.2rem;flex-shrink:0">W</div>
+            <div>
+              <div class="testimonial-name">Whānau Member</div>
+              <div class="testimonial-role">Little Village Parent</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA BANNER ===== -->
+  <section class="section-padding" style="background:var(--cream);">
+    <div class="container">
+      <div class="cta-banner fade-in">
+        <h2>Ready to Join Our Little Village?</h2>
+        <p>Schedule a visit and see why families love us. Your child's joyful learning journey starts here.</p>
+        <a href="contact.html" class="btn btn-lg">Book a Tour Today</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="margin-bottom:4px">
+            <svg width="40" height="40" viewBox="0 0 44 44" fill="none">
+              <circle cx="22" cy="22" r="22" fill="#FFD166" opacity=".15"/>
+              <path d="M22 8L10 18v14a2 2 0 002 2h20a2 2 0 002-2V18L22 8z" fill="#7EC8B7" stroke="#5aab99" stroke-width="1.5"/>
+              <rect x="18" y="24" width="8" height="10" rx="2" fill="#FFD166"/>
+              <circle cx="22" cy="16" r="3" fill="#EF767A"/>
+            </svg>
+            <div class="nav-logo-text" style="color:var(--white)">
+              Little Village
+              <span>Preschool & Early Learning</span>
+            </div>
+          </a>
+          <p>Where everyone has a place. A nurturing space where children unleash their full potential through curiosity, creativity, and play.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Quick Links</h4>
+          <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="programs.html">Programs</a>
+            <a href="story.html">Our Story</a>
+            <a href="enrolment.html">Enrolment</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Programs</h4>
+          <div class="footer-links">
+            <a href="programs.html">Babies & Toddlers (0–2)</a>
+            <a href="programs.html">Little Learners (2–3.5)</a>
+            <a href="programs.html">Preschool Programme (3.5+)</a>
+            <a href="enrolment.html">Current Promotion</a>
+          </div>
+        </div>
+
+        <div>
+          <h4>Get in Touch</h4>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>46 Ambler Avenue<br>Glen Eden, Auckland 0602</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            <a href="tel:099480365" style="color:inherit">09 948 0365</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>Info@lvpreschool.co.nz</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 Little Village Preschool. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
