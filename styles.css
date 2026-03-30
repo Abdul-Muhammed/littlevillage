@@ -176,10 +176,12 @@ h1,h2,h3,h4,h5,h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
+  height: 130px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
+  position: relative;
+  z-index: 1001;
 }
 
 .nav-logo {
@@ -215,10 +217,10 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .nav-links a {
-  padding: 8px 18px;
+  padding: 10px 16px;
   border-radius: var(--radius-full);
   font-weight: 600;
-  font-size: .95rem;
+  font-size: 1.05rem;
   color: var(--text);
   transition: var(--transition);
 }
@@ -260,13 +262,19 @@ h1,h2,h3,h4,h5,h6 {
 .nav-mobile {
   display: none;
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   background: var(--warm-white);
   z-index: 999;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  padding: 120px 24px 40px;
+  overflow-y: auto;
   opacity: 0;
   pointer-events: none;
   transition: var(--transition);
@@ -279,12 +287,15 @@ h1,h2,h3,h4,h5,h6 {
 
 .nav-mobile a {
   font-family: 'Baloo 2', cursive;
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   font-weight: 600;
   color: var(--text-dark);
   padding: 12px 32px;
   border-radius: var(--radius-full);
   transition: var(--transition);
+  width: 80%;
+  max-width: 300px;
+  text-align: center;
 }
 
 .nav-mobile a:hover,
@@ -293,12 +304,27 @@ h1,h2,h3,h4,h5,h6 {
   background: rgba(239,118,122,.08);
 }
 
-.nav-mobile .btn { margin-top: 16px; }
+.nav-mobile .btn {
+  margin-top: 16px;
+  width: auto;
+}
 
 @media (max-width: 900px) {
   .nav-links, .nav-cta { display: none; }
   .nav-hamburger { display: flex; }
   .nav-mobile { display: flex; }
+  .nav-inner {
+    justify-content: center;
+  }
+  .nav-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .nav-hamburger {
+    position: absolute;
+    right: 24px;
+  }
 }
 
 /* ---------- Hero Wave Divider ---------- */
@@ -462,7 +488,7 @@ h1,h2,h3,h4,h5,h6 {
 /* ---------- Page Hero ---------- */
 .page-hero {
   position: relative;
-  padding: 160px 0 100px;
+  padding: 180px 0 100px;
   text-align: center;
   overflow: hidden;
 }
@@ -881,9 +907,138 @@ h1,h2,h3,h4,h5,h6 {
   .promo-detail-item .promo-number { font-size: 2rem; }
 }
 
+/* ---------- Gallery ---------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.gallery-item {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.gallery-item:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+.gallery-item.span-2 {
+  grid-column: span 2;
+}
+
+.gallery-item.span-2 img {
+  height: 400px;
+}
+
+@media (max-width: 900px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item.span-2 { grid-column: span 2; }
+  .gallery-item.span-2 img { height: 300px; }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-item.span-2 { grid-column: span 1; }
+  .gallery-item img, .gallery-item.span-2 img { height: 260px; }
+}
+
+/* ---------- FAQ Category ---------- */
+.faq-category {
+  margin-bottom: 48px;
+}
+
+.faq-category-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.faq-category-title .cat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ---------- Promo Offers Grid ---------- */
+.promo-offers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.promo-offer {
+  background: var(--warm-white);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  text-align: center;
+  border: 2px solid var(--sand);
+}
+
+.promo-offer-age {
+  display: inline-block;
+  padding: 4px 16px;
+  border-radius: var(--radius-full);
+  font-weight: 800;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 16px;
+}
+
+.promo-offer .promo-number {
+  font-family: 'Baloo 2', cursive;
+  font-size: 2.4rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.promo-offer .promo-label {
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.promo-offer .promo-extra {
+  font-size: .82rem;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .promo-offers { grid-template-columns: 1fr; }
+  .promo-offer .promo-number { font-size: 2rem; }
+}
+
 /* ---------- Responsive Typography ---------- */
 @media (max-width: 600px) {
   .section-padding { padding: 60px 0; }
-  .page-hero { padding: 130px 0 70px; }
+  .page-hero { padding: 150px 0 70px; }
   .cta-banner { padding: 40px 24px; border-radius: var(--radius-lg); }
 }
