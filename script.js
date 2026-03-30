@@ -108,4 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!isOpen) item.classList.add('open');
     });
   });
+
+  /* Open pricing accordion when landing with #pricing-table (e.g. from home page) */
+  if (window.location.hash === '#pricing-table') {
+    const pricingItem = document.getElementById('pricing-table');
+    if (pricingItem?.classList.contains('faq-item')) {
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      pricingItem.classList.add('open');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          pricingItem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    }
+  }
 });
