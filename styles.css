@@ -316,7 +316,8 @@ h1,h2,h3,h4,h5,h6 {
   .nav-inner {
     justify-content: center;
   }
-  .nav-logo {
+  /* Scope to navbar only — footer also uses .nav-logo and must stay in normal flow */
+  .nav-inner .nav-logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
