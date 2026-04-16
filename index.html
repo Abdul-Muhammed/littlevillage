@@ -217,6 +217,97 @@
       .hero-float-card.card-2 { right: 10px; }
     }
 
+    /* ===== Center Gallery Bento Grid ===== */
+    .center-gallery {
+      padding: 0 0 80px;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .center-gallery-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: 1fr 2.4fr 1fr;
+      grid-template-rows: 230px 230px;
+      gap: 14px;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .bento-grid .bento-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+    }
+
+    .bento-grid .bento-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s ease, filter .5s ease;
+    }
+
+    .bento-grid .bento-item:hover img {
+      transform: scale(1.06);
+    }
+
+    .bento-grid .bento-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.18) 100%);
+      pointer-events: none;
+      transition: opacity .4s ease;
+    }
+
+    .bento-grid .bento-item:hover::after {
+      opacity: 0;
+    }
+
+    .bento-main {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    @media (max-width: 900px) {
+      .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 12px;
+      }
+      .bento-main {
+        order: -1;
+        grid-column: 1 / -1;
+        height: 340px;
+      }
+      .bento-grid .bento-item:not(.bento-main) {
+        height: 160px;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .bento-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        gap: 10px;
+      }
+      .bento-main {
+        order: -1;
+        grid-column: 1 / -1;
+        height: 300px;
+      }
+      .bento-grid .bento-item:not(.bento-main) {
+        height: 130px;
+      }
+    }
+
     .trust-strip { padding: 60px 0; background: var(--white); }
     .trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
     .trust-item { text-align: center; padding: 24px; }
@@ -398,7 +489,7 @@
 
         <div class="hero-image-wrapper">
           <div class="hero-image-main">
-            <img src="assets/kid_in_tree.jpeg" alt="Child exploring nature at Little Village Preschool">
+            <img src="assets/hero.jpeg" alt="Child exploring nature at Little Village Preschool">
           </div>
 
           <div class="hero-float-card card-1">
@@ -454,6 +545,29 @@
         </div>
         <a href="enrolment.html" class="btn btn-primary btn-lg">Enquire About This Offer</a>
         <p class="promo-note">*Conditions apply. Contact us for full details and eligibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CENTER GALLERY ===== -->
+  <section class="center-gallery">
+    <div class="center-gallery-inner">
+      <div class="bento-grid fade-in">
+        <div class="bento-item">
+          <img src="assets/center-1.jpeg" alt="Little Village centre life">
+        </div>
+        <div class="bento-item bento-main">
+          <img src="assets/centter-main.jpeg" alt="Little Village Preschool centre">
+        </div>
+        <div class="bento-item">
+          <img src="assets/center-2.jpeg" alt="Children learning at Little Village">
+        </div>
+        <div class="bento-item">
+          <img src="assets/center-3.jpeg" alt="Activities at Little Village">
+        </div>
+        <div class="bento-item">
+          <img src="assets/center-4.jpeg" alt="Our centre environment">
+        </div>
       </div>
     </div>
   </section>
