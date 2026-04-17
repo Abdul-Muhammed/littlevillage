@@ -375,6 +375,40 @@
       background: linear-gradient(180deg, var(--cream) 0%, #F5F0FA 100%);
     }
 
+    .video-testimonial {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      background: #000;
+    }
+
+    .video-testimonial video {
+      display: block;
+      width: 100%;
+      border-radius: var(--radius-lg);
+    }
+
+    .video-testimonial-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .video-testimonial-label span {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--lavender);
+      background: rgba(184,169,232,.12);
+      padding: 6px 18px;
+      border-radius: var(--radius-full);
+    }
+
     .stats { background: var(--white); }
     .stats-grid {
       display: grid; grid-template-columns: repeat(4, 1fr);
@@ -789,6 +823,21 @@
         <span class="section-label">Parent Voices</span>
         <h2 class="section-title">What Families Say About Us</h2>
         <p class="section-subtitle mx-auto">Real stories from families who chose Little Village for their children's early learning journey.</p>
+      </div>
+
+      <div class="fade-in" style="max-width:740px;margin:0 auto 52px">
+        <div class="video-testimonial-label">
+          <span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Watch a Parent's Story
+          </span>
+        </div>
+        <div class="video-testimonial">
+          <video controls preload="metadata">
+            <source src="assets/video-testimonial.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
       </div>
 
       <div class="grid-3" data-stagger>
